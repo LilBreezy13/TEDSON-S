@@ -19,7 +19,8 @@
   </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen pb-24">
+<body class="bg-gray-100 min-h-screen pb-36">
+
 
 <!-- HEADER -->
 <header class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
@@ -94,12 +95,51 @@
         placeholder="Quantity"
         class="w-full border p-2 rounded" />
 
-      <button onclick="restock()"
-        class="w-full bg-green-600 text-white p-3 rounded font-semibold active:scale-95">
-        Add Stock
-      </button>
+     <button
+  id="restockBtn"
+  type="button"
+  onclick="restock()"
+  class="w-full bg-green-600 text-white p-3 rounded font-semibold
+         flex items-center justify-center gap-2
+         active:scale-95 disabled:opacity-60">
+  <span id="restockBtnText">Add Stock</span>
+  <svg id="restockSpinner"
+       class="w-5 h-5 hidden animate-spin"
+       xmlns="http://www.w3.org/2000/svg"
+       fill="none" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10"
+            stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8v4l3-3-3-3v4a12 12 0 00-12 12h4z"/>
+  </svg>
+</button>
+
     </div>
   </section>
+
+  <section>
+  <div class="flex justify-between items-center mb-3">
+    <h2 class="text-sm font-semibold">Stock History</h2>
+
+    <input
+      type="date"
+      id="stockFilterDate"
+      class="border rounded p-1 text-xs"
+    />
+  </div>
+
+  <div id="stockHistory"
+       class="bg-white rounded-xl shadow divide-y">
+  </div>
+
+  <button
+    id="toggleStockHistory"
+    onclick="toggleStockHistory()"
+    class="text-xs text-blue-600 mt-2 hidden">
+    Show more
+  </button>
+</section>
+
 
   <!-- ================= SALES HISTORY ================= -->
   <section>

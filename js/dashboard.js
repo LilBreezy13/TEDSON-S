@@ -65,6 +65,8 @@ productsList.innerHTML += `
   `;
 });
 
+
+
 document.getElementById("productCount").textContent = productSnap.size;
 document.getElementById("lowStock").textContent = lowStockCount;
 
