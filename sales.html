@@ -3,15 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <title>Sales</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    body { font-family: Inter, sans-serif; }
+    /* ================= GLOBAL SAFETY ================= */
+    * {
+      box-sizing: border-box;
+      max-width: 100%;
+    }
 
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      font-family: Inter, sans-serif;
+    }
+
+    /* ================= INPUT FIXES ================= */
+    input,
+    select,
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Prevent mobile numeric expansion */
+    input[type="number"],
+    input[type="text"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+    }
+
+    /* ================= ANIMATIONS ================= */
     @keyframes slideUp {
       from { transform: translateY(100%); }
       to { transform: translateY(0); }
@@ -23,39 +54,35 @@
       to { opacity: 1; }
     }
     .animate-fadeIn { animation: fadeIn .2s ease-out; }
-
-    input[type="number"] {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
   </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen pb-28">
+<body class="bg-gray-100 min-h-screen pb-28 overflow-x-hidden">
 
-<!-- HEADER -->
-<header class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
-  <div>
-    <h1 class="text-lg font-semibold">New Sale</h1>
-    <p class="text-xs text-gray-500">Point of Sale</p>
+<!-- ================= HEADER ================= -->
+<header class="bg-white shadow-sm px-4 py-3 flex justify-between items-center sticky top-0 z-20">
+  <div class="min-w-0">
+    <h1 class="text-lg font-semibold truncate">New Sale</h1>
+    <p class="text-xs text-gray-500 truncate">Point of Sale</p>
   </div>
-  <a href="dashboard.html" class="text-sm text-blue-600">Dashboard</a>
+  <a href="dashboard.html" class="text-sm text-blue-600 whitespace-nowrap">
+    Dashboard
+  </a>
 </header>
 
-<!-- MAIN -->
-<main class="p-4 max-w-md mx-auto space-y-6">
+<!-- ================= MAIN ================= -->
+<main class="px-4 pt-4 max-w-md mx-auto space-y-6 overflow-x-hidden">
 
   <!-- SALE CARD -->
-  <div class="bg-white rounded-3xl shadow p-5 space-y-5">
+  <section class="bg-white rounded-3xl shadow p-5 space-y-5">
 
     <!-- Product -->
-    <div>
+    <div class="w-full">
       <label class="text-xs text-gray-500">Product</label>
-      <select id="product"
-      class="w-full mt-1 border rounded-xl p-3 text-sm overflow-hidden text-ellipsis"
-
+      <select
+        id="product"
+        class="w-full mt-1 border rounded-xl px-3 py-3 text-sm truncate"
+      >
         <option value="">Select product</option>
       </select>
     </div>
@@ -63,60 +90,66 @@
     <!-- Price -->
     <div class="flex justify-between text-sm">
       <span class="text-gray-500">Unit Price</span>
-      <span id="price" class="font-semibold">₵0.00</span>
+      <span id="price" class="font-semibold whitespace-nowrap">₵0.00</span>
     </div>
 
     <!-- Quantity -->
-    <div>
+    <div class="w-full">
       <label class="text-xs text-gray-500">Quantity</label>
-   <input id="qty"
-  type="text"
-  inputmode="numeric"
-  pattern="[0-9]*"
-  placeholder="0"
-  class="w-full mt-1 border rounded-xl p-3 text-sm text-center" />
-
+      <input
+        id="qty"
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        placeholder="0"
+        class="w-full mt-1 border rounded-xl px-3 py-3 text-sm text-center"
+      />
     </div>
 
     <!-- Total -->
-    <div class="flex justify-between items-center bg-gray-50 rounded-xl p-3">
+    <div class="flex justify-between items-center bg-gray-50 rounded-xl px-3 py-3">
       <span class="font-medium">Total</span>
-      <span id="total" class="text-lg font-bold">₵0.00</span>
+      <span id="total" class="text-lg font-bold whitespace-nowrap">₵0.00</span>
     </div>
 
     <!-- Button -->
-    <button onclick="submitSale()"
-      class="w-full bg-black text-white p-4 rounded-2xl text-sm font-semibold active:scale-95 transition">
+    <button
+      onclick="submitSale()"
+      class="w-full bg-black text-white py-4 rounded-2xl text-sm font-semibold active:scale-95 transition"
+    >
       Complete Sale
     </button>
 
     <!-- Error -->
-    <p id="error"
-      class="hidden text-sm bg-red-100 text-red-700 p-3 rounded-xl">
-    </p>
-  </div>
+    <p
+      id="error"
+      class="hidden text-sm bg-red-100 text-red-700 p-3 rounded-xl"
+    ></p>
+  </section>
 
   <!-- MOST SOLD -->
-  <div class="bg-white rounded-2xl shadow p-4">
+  <section class="bg-white rounded-2xl shadow p-4">
     <p class="text-sm font-semibold mb-2">Most Sold Product</p>
-    <p id="topProduct" class="text-gray-600 text-sm">—</p>
-  </div>
+    <p id="topProduct" class="text-gray-600 text-sm truncate">—</p>
+  </section>
 
   <!-- SALES HISTORY -->
-  <div>
+  <section>
     <p class="text-sm font-semibold mb-2">Sales History</p>
-    <div id="salesHistory"
-      class="bg-white rounded-2xl shadow divide-y">
-    </div>
-  </div>
+    <div
+      id="salesHistory"
+      class="bg-white rounded-2xl shadow divide-y overflow-hidden"
+    ></div>
+  </section>
 
 </main>
 
-<!-- ================= MODAL ================= -->
-<div id="saleModal"
-  class="fixed inset-0 bg-black/40 hidden items-end z-50 animate-fadeIn">
-
-  <div class="bg-white w-full rounded-t-3xl p-6 space-y-4 animate-slideUp">
+<!-- ================= SUCCESS MODAL ================= -->
+<div
+  id="saleModal"
+  class="fixed inset-0 bg-black/40 hidden items-end z-50 animate-fadeIn"
+>
+  <div class="bg-white w-full rounded-t-3xl px-6 py-6 space-y-4 animate-slideUp">
     <div class="flex items-center gap-2 text-green-600">
       <i data-lucide="check-circle"></i>
       <p class="font-semibold">Sale Completed</p>
@@ -124,20 +157,22 @@
 
     <p id="modalText" class="text-sm text-gray-600"></p>
 
-    <button onclick="closeModal()"
-      class="w-full bg-black text-white p-3 rounded-xl font-semibold">
+    <button
+      onclick="closeModal()"
+      class="w-full bg-black text-white py-3 rounded-xl font-semibold"
+    >
       Done
     </button>
   </div>
 </div>
 
+<!-- ================= SCRIPTS ================= -->
 <script type="module" src="js/auth.js"></script>
 <script type="module" src="js/sales.js"></script>
 
 <script>
   lucide.createIcons();
 
-  // BEAUTIFUL MODAL
   window.showSaleModal = function (message) {
     document.getElementById("modalText").textContent = message;
     document.getElementById("saleModal").classList.remove("hidden");
