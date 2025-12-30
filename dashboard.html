@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  body { font-family: Inter, sans-serif; }
+
+  
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slideUp {
+  animation: slideUp .3s ease-out;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scaleIn {
+  animation: scaleIn .2s ease-out;
+}
+</style>
+
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<!-- <header class="bg-white shadow-sm p-4 flex justify-between items-center">
+  <h1 class="text-lg font-semibold">Inventory Dashboard</h1>
+
+  <nav class="hidden md:flex gap-4 text-sm">
+    <a href="dashboard.html" class="font-medium">Dashboard</a>
+    <a href="sales.html">Sales</a>
+    <a href="add-product.html">Add Product</a>
+    <button onclick="logout()" class="text-red-600">Logout</button>
+  </nav>
+</header> -->
+
+
+  <main class="p-4 max-w-6xl mx-auto space-y-8">
+
+    <!-- ================= SUMMARY ================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  body { font-family: Inter, sans-serif; }
+
+  
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slideUp {
+  animation: slideUp .3s ease-out;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scaleIn {
+  animation: scaleIn .2s ease-out;
+}
+</style>
+
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<header class="bg-white shadow-sm p-4 flex justify-between items-center">
+  <h1 class="text-lg font-semibold">Inventory Dashboard</h1>
+
+  <nav class="hidden md:flex gap-4 text-sm">
+    <a href="dashboard.html" class="font-medium">Dashboard</a>
+    <a href="sales.html">Sales</a>
+    <a href="add-product.html">Add Product</a>
+    <button onclick="logout()" class="text-red-600">Logout</button>
+  </nav>
+</header>
+
+
+  <main class="p-4 max-w-6xl mx-auto space-y-8">
+
+    <!-- ================= SUMMARY ================= -->
+   <section>
+  <h2 class="text-sm font-semibold mb-3 text-gray-700">
+    Business Overview
+  </h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+    <div class="bg-white p-4 rounded-2xl shadow-sm border">
+      <div class="flex items-center gap-2 text-gray-500 text-xs">
+        <i data-lucide="wallet"></i> Today Sales
+      </div>
+      <p id="todaySales" class="text-2xl font-bold mt-2">₵0</p>
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl shadow-sm border">
+      <div class="flex items-center gap-2 text-gray-500 text-xs">
+        <i data-lucide="trending-up"></i> Revenue
+      </div>
+      <p id="revenue" class="text-2xl font-bold mt-2">₵0</p>
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl shadow-sm border">
+      <div class="flex items-center gap-2 text-gray-500 text-xs">
+        <i data-lucide="package"></i> Products
+      </div>
+      <p id="productCount" class="text-2xl font-bold mt-2">0</p>
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl shadow-sm border">
+      <div class="flex items-center gap-2 text-red-500 text-xs">
+        <i data-lucide="alert-triangle"></i> Low Stock
+      </div>
+      <p id="lowStock" class="text-2xl font-bold mt-2 text-red-600">0</p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ================= PRODUCTS ================= -->
+    <section>
+      <h2 class="text-sm font-semibold mb-3">Products</h2>
+
+      <div id="productsList"
+        class="bg-white rounded-xl shadow divide-y">
+      </div>
+    </section>
+
+    <!-- ================= STOCK IN ================= -->
+    <section>
+      <h2 class="text-sm font-semibold mb-3">Restock Product</h2>
+
+      <div class="bg-white p-4 rounded-xl shadow space-y-3">
+        <select id="restockProduct"
+          class="w-full border p-2 rounded"></select>
+
+        <input id="restockQty"
+          type="number"
+          placeholder="Quantity"
+          class="w-full border p-2 rounded" />
+
+        <button onclick="restock()"
+          class="w-full bg-green-600 text-white p-3 rounded">
+          Add Stock
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= SALES ================= -->
+    <section>
+      <h2 class="text-sm font-semibold mb-3">Sales History</h2>
+
+      <div id="salesList"
+        class="bg-white rounded-xl shadow divide-y">
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/dashboard.js"></script>
+  <script type="module" src="js/auth.js"></script>
+
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden">
+  <div class="flex justify-around text-xs py-2">
+
+    <a href="dashboard.html" class="flex flex-col items-center">
+      <i data-lucide="home"></i>
+      Dashboard
+    </a>
+
+    <a href="sales.html" class="flex flex-col items-center">
+      <i data-lucide="shopping-cart"></i>
+      Sales
+    </a>
+
+    <a href="add-product.html" class="flex flex-col items-center">
+      <i data-lucide="plus-circle"></i>
+      Add
+    </a>
+
+    <button onclick="logout()" class="flex flex-col items-center text-red-600">
+      <i data-lucide="log-out"></i>
+      Logout
+    </button>
+
+  </div>
+</nav>
+
+<!-- iOS MODAL -->
+<div id="iosModal"
+  class="fixed inset-0 bg-black/40 hidden items-end z-50">
+
+  <div class="bg-white w-full rounded-t-3xl p-5 space-y-4 animate-slideUp">
+    <p id="iosModalText"
+      class="text-center text-lg font-semibold"></p>
+
+    <button onclick="closeModal()"
+      class="w-full bg-gray-100 text-blue-600 font-semibold p-3 rounded-xl">
+      OK
+    </button>
+  </div>
+</div>
+
+
+<!-- ANDROID MODAL -->
+<div id="androidModal"
+  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+  <div class="bg-white w-11/12 max-w-sm rounded-2xl p-5 space-y-4 animate-scaleIn">
+    <p id="androidModalText"
+      class="text-base font-medium text-gray-800"></p>
+
+    <div class="flex justify-end">
+      <button onclick="closeModal()"
+        class="text-green-600 font-semibold">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+    <!-- ================= PRODUCTS ================= -->
+    <section>
+      <h2 class="text-sm font-semibold mb-3">Products</h2>
+
+      <div id="productsList"
+        class="bg-white rounded-xl shadow divide-y">
+      </div>
+    </section>
+
+    <!-- ================= STOCK IN ================= -->
+    <section>
+      <h2 class="text-sm font-semibold mb-3">Restock Product</h2>
+
+      <div class="bg-white p-4 rounded-xl shadow space-y-3">
+        <select id="restockProduct"
+          class="w-full border p-2 rounded"></select>
+
+        <input id="restockQty"
+          type="number"
+          placeholder="Quantity"
+          class="w-full border p-2 rounded" />
+
+        <button onclick="restock()"
+          class="w-full bg-green-600 text-white p-3 rounded">
+          Add Stock
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= SALES ================= -->
+    <section>
+      <h2 class="text-sm font-semibold mb-3">Sales History</h2>
+
+      <div id="salesList"
+        class="bg-white rounded-xl shadow divide-y">
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/dashboard.js"></script>
+  <script type="module" src="js/auth.js"></script>
+
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden">
+  <div class="flex justify-around text-xs py-2">
+
+    <a href="dashboard.html" class="flex flex-col items-center">
+      <i data-lucide="home"></i>
+      Dashboard
+    </a>
+
+    <a href="sales.html" class="flex flex-col items-center">
+      <i data-lucide="shopping-cart"></i>
+      Sales
+    </a>
+
+    <a href="add-product.html" class="flex flex-col items-center">
+      <i data-lucide="plus-circle"></i>
+      Add
+    </a>
+
+    <button onclick="logout()" class="flex flex-col items-center text-red-600">
+      <i data-lucide="log-out"></i>
+      Logout
+    </button>
+
+  </div>
+</nav>
+
+<!-- iOS MODAL -->
+<div id="iosModal"
+  class="fixed inset-0 bg-black/40 hidden items-end z-50">
+
+  <div class="bg-white w-full rounded-t-3xl p-5 space-y-4 animate-slideUp">
+    <p id="iosModalText"
+      class="text-center text-lg font-semibold"></p>
+
+    <button onclick="closeModal()"
+      class="w-full bg-gray-100 text-blue-600 font-semibold p-3 rounded-xl">
+      OK
+    </button>
+  </div>
+</div>
+
+
+<!-- ANDROID MODAL -->
+<div id="androidModal"
+  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+  <div class="bg-white w-11/12 max-w-sm rounded-2xl p-5 space-y-4 animate-scaleIn">
+    <p id="androidModalText"
+      class="text-base font-medium text-gray-800"></p>
+
+    <div class="flex justify-end">
+      <button onclick="closeModal()"
+        class="text-green-600 font-semibold">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

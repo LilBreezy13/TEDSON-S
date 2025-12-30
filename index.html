@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-6 rounded shadow w-full max-w-sm">
+    <h1 class="text-2xl font-bold mb-4 text-center">
+      Inventory Login
+    </h1>
+
+    <!-- Error message -->
+    <p id="error"
+       class="hidden bg-red-100 text-red-700 p-2 rounded mb-3 text-sm">
+    </p>
+
+    <!-- Email -->
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+      class="w-full border p-2 rounded mb-3"
+    />
+
+    <!-- Password -->
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+      class="w-full border p-2 rounded mb-4"
+    />
+
+    <!-- Email login -->
+    <button
+      onclick="login()"
+      class="w-full bg-black text-white p-2 rounded hover:bg-gray-800">
+      Login
+    </button>
+
+    <!-- Divider -->
+    <div class="flex items-center my-4">
+      <hr class="flex-grow border-gray-300">
+      <span class="px-2 text-gray-400 text-sm">OR</span>
+      <hr class="flex-grow border-gray-300">
+    </div>
+
+    <!-- Google login -->
+    <button
+      onclick="loginWithGoogle()"
+      class="w-full border border-gray-300 p-2 rounded flex items-center justify-center gap-2 hover:bg-gray-100">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg"
+           class="w-5 h-5" />
+      <span>Login with Google</span>
+    </button>
+  </div>
+
+  <!-- Login logic -->
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

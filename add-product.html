@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Product</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- HEADER -->
+  <header class="bg-white shadow-sm p-4 flex justify-between items-center">
+    <div>
+      <h1 class="text-lg font-semibold">Add Product</h1>
+      <p class="text-xs text-gray-500">Inventory Management</p>
+    </div>
+    <a href="dashboard.html" class="text-sm text-blue-600">Dashboard</a>
+  </header>
+
+  <!-- MAIN -->
+  <main class="p-4 max-w-lg mx-auto">
+
+    <div class="bg-white rounded-xl shadow p-5 space-y-5">
+
+      <h2 class="text-base font-semibold text-gray-700">
+        Product Details
+      </h2>
+
+      <!-- Product Name -->
+      <div>
+        <label class="text-sm text-gray-600">Product Name</label>
+        <input id="name"
+          type="text"
+          class="w-full mt-1 border rounded-lg p-2 focus:ring focus:ring-black/20"
+          placeholder="e.g. Rice 25kg" />
+      </div>
+
+      <!-- Price -->
+      <div>
+        <label class="text-sm text-gray-600">
+          Price (₵ Ghana Cedis)
+        </label>
+        <input id="price"
+          type="number"
+          step="0.01"
+          class="w-full mt-1 border rounded-lg p-2"
+          placeholder="e.g. 350.00" />
+      </div>
+
+      
+
+      <!-- Initial Stock -->
+      <div>
+        <label class="text-sm text-gray-600">Initial Stock Quantity</label>
+        <input id="stock"
+          type="number"
+          class="w-full mt-1 border rounded-lg p-2"
+          placeholder="e.g. 100" />
+      </div>
+
+      <!-- Minimum Stock -->
+      <div>
+        <label class="text-sm text-gray-600">
+          Minimum Stock Alert Level
+        </label>
+        <input id="minStock"
+          type="number"
+          class="w-full mt-1 border rounded-lg p-2"
+          placeholder="e.g. 20" />
+      </div>
+
+      <!-- Added By -->
+      <div class="text-xs text-gray-500">
+        Added by:
+        <span id="addedBy" class="font-medium"></span>
+      </div>
+
+      <!-- Error -->
+      <p id="error"
+        class="hidden bg-red-100 text-red-700 p-2 rounded text-sm">
+      </p>
+
+      <!-- Success -->
+      <p id="success"
+        class="hidden bg-green-100 text-green-700 p-2 rounded text-sm">
+      </p>
+
+      <!-- Buttons -->
+      <div class="flex gap-3">
+        <button onclick="addProduct()"
+          class="flex-1 bg-black text-white p-3 rounded-lg">
+          Save Product
+        </button>
+
+        <button onclick="resetForm()"
+          class="flex-1 border p-3 rounded-lg">
+          Add Another
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script type="module" src="js/add-product.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
