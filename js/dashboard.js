@@ -23,24 +23,41 @@ let lowStockCount = 0;
 productSnap.forEach(docSnap => {
   const p = docSnap.data();
   products[docSnap.id] = p;
+  
 
   if (p.stock <= p.minStock) lowStockCount++;
 
+const price = Number(p.price || 0);
+const stock = Number(p.stock || 0);
+const totalValue = price * stock;
+
 productsList.innerHTML += `
-  <div class="p-4 flex justify-between items-center">
-    <div>
+  <div class="p-4 flex justify-between items-center gap-3">
+
+    <!-- LEFT -->
+    <div class="flex-1 min-w-0">
       <p class="font-semibold">${p.name}</p>
       <p class="text-xs text-gray-500">
-        ₵${p.price} • Stock: ${p.stock}
+        ₵${price} × ${stock} in stock
       </p>
     </div>
 
-    <span class="text-xs px-2 py-1 rounded-full
-      ${p.stock <= p.minStock ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
-      ${p.stock <= p.minStock ? 'Low' : 'OK'}
-    </span>
+    <!-- RIGHT -->
+    <div class="text-right">
+      <p class="text-sm font-bold text-green-600">
+        ₵${totalValue.toLocaleString()}
+      </p>
+      <p class="text-[10px] text-gray-400">Total Value</p>
+
+      <span class="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full
+        ${stock <= p.minStock ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+        ${stock <= p.minStock ? 'Low' : 'OK'}
+      </span>
+    </div>
+
   </div>
 `;
+
 
 
   restockSelect.innerHTML += `
@@ -141,32 +158,57 @@ let inventoryGrandTotal = 0;
 async function loadProducts() {
   const snap = await getDocs(collection(db, "products"));
 
-  productsCache = [];
-  inventoryGrandTotal = 0;
+  const productsList = document.getElementById("productsList");
+  productsList.innerHTML = "";
 
+  let inventoryGrandTotal = 0;
   let lowStock = 0;
 
-  snap.forEach(d => {
-    const p = d.data();
-    const totalValue = p.costPrice * p.stock;
+  snap.forEach(docSnap => {
+    const p = docSnap.data();
+
+    const price = Number(p.price || 0);
+    const stock = Number(p.stock || 0);
+    const totalValue = price * stock;
 
     inventoryGrandTotal += totalValue;
-    productsCache.push({
-      name: p.name,
-      totalValue
-    });
 
-    if (p.stock <= p.minStock) lowStock++;
+    if (stock <= p.minStock) lowStock++;
+
+    productsList.innerHTML += `
+      <div class="p-4 flex justify-between items-center gap-3">
+
+        <!-- LEFT -->
+        <div class="flex-1 min-w-0">
+          <p class="font-semibold text-sm truncate">${p.name}</p>
+
+          <p class="text-xs text-gray-500 mt-1">
+            ₵${price.toLocaleString()} × ${stock} units
+          </p>
+        </div>
+
+        <!-- RIGHT (THIS IS WHAT YOU WANT) -->
+        <div class="text-right">
+          <p class="text-sm font-bold text-green-600">
+            ₵${totalValue.toLocaleString()}
+          </p>
+          <p class="text-[10px] text-gray-400">
+            Total Value
+          </p>
+        </div>
+
+      </div>
+    `;
   });
 
-  document.getElementById("inventoryValue").textContent =
-    `₵${inventoryGrandTotal.toLocaleString()}`;
+  // Optional KPIs
+  document.getElementById("lowStock").textContent = lowStock;
 
-  document.getElementById("productCount").textContent =
-    productsCache.length;
-
-  document.getElementById("lowStock").textContent =
-    lowStock;
+  // If you have a grand total element
+  const inv = document.getElementById("inventoryValue");
+  if (inv) {
+    inv.textContent = `₵${inventoryGrandTotal.toLocaleString()}`;
+  }
 }
 
 lucide.createIcons();
