@@ -23,6 +23,13 @@
       to { opacity: 1; }
     }
     .animate-fadeIn { animation: fadeIn .2s ease-out; }
+
+    input[type="number"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
   </style>
 </head>
 
@@ -47,7 +54,8 @@
     <div>
       <label class="text-xs text-gray-500">Product</label>
       <select id="product"
-        class="w-full mt-1 border rounded-xl p-3 text-sm">
+      class="w-full mt-1 border rounded-xl p-3 text-sm overflow-hidden text-ellipsis"
+
         <option value="">Select product</option>
       </select>
     </div>
@@ -61,11 +69,13 @@
     <!-- Quantity -->
     <div>
       <label class="text-xs text-gray-500">Quantity</label>
-      <input id="qty"
-        type="number"
-        min="1"
-        inputmode="numeric"
-        class="w-full mt-1 border rounded-xl p-3 text-sm" />
+   <input id="qty"
+  type="text"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  placeholder="0"
+  class="w-full mt-1 border rounded-xl p-3 text-sm text-center" />
+
     </div>
 
     <!-- Total -->
